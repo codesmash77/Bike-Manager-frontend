@@ -1,0 +1,45 @@
+.disabled-page {
+  color: #687078;
+}
+
+.active {
+  border-radius: 40px;
+  color: #055cad;
+}
+
+.next {
+  font-size: 4px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  width: 150px;
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  justify-content: center;
+  list-style-type: none;
+  position: relative;
+  width: 500px;
+}
+
+.pagination-link {
+  font-weight: 600;
+  color: #4091dc;
+}
+
+.pagination__link--active{
+  font-weight: 700;
+  color: #055cad;
+}
+
+.previous {
+  font-size: 4px;
+  height: 30px;
+  left: 0;
+  position: absolute;
+  width: 150px;
+}
