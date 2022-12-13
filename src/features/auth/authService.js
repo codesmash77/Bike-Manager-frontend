@@ -1,5 +1,6 @@
 import custom_axios from "../../axios/axiosSetup"
 import { ApiConstants } from '../../constants/ApiConstant';
+import jwt_decode from "jwt-decode";
 
 const register = async (userData) => {
     const response = await custom_axios().post(ApiConstants.USER.ADD, {
@@ -10,6 +11,9 @@ const register = async (userData) => {
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
     }
+    const decoded = jwt_decode(response?.data?.access_token)
+    const access_token = response?.data
+    const data = { ...access_token, userId: decoded?.userId, userName: decoded?.userName, userRole: decoded.userRole, password: decoded.password }
 
     return response.data
 }
@@ -22,6 +26,9 @@ const login = async (userData) => {
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
     }
+    const decoded = jwt_decode(response?.data?.access_token);
+    const access_token = response?.data
+    const data = { ...access_token, userId: decoded?.userId, userName: decoded?.userName, userRole: decoded.userRole, password: decoded.password }
 
     return response.data
 }

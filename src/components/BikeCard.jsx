@@ -53,7 +53,7 @@ const BikeCard = React.memo(({ bike }) => {
           <Center>
             <ButtonGroup colorScheme='teal' variant='solid'>
               <Button onClick={() => { navigate(`/Bike/${bike?.id}`) }}>
-                Reserve
+                View Bike
               </Button>
             </ButtonGroup>
           </Center>

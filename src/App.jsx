@@ -17,6 +17,7 @@ import ForbiddenAccess from './components/Forbiden';
 import NotFound from './components/NotFound';
 import AddBike from './pages/AddBike';
 import Bike from './pages/Bike';
+import MyReservations from './pages/MyReservations';
 
 const App = React.memo(() => {
   return (
@@ -28,8 +29,8 @@ const App = React.memo(() => {
             <Route path='/home' element={<Dashboard />} />
             <Route path = '/addBike' element={<AddBike/>} />
             <Route path = '/Bike/:bikeId' element={<Bike/>} />
-            {/* <Route path = '/myQuizes' element={<MyQuizes/>} />
-            <Route path = '/createQuiz' element={<CreateQuiz/>} />
+            <Route path = '/myReservations' element={<MyReservations/>} />
+            {/* <Route path = '/createQuiz' element={<CreateQuiz/>} />
             <Route path = '/takeQuiz/:permalink' element={<TakeQuiz/>} /> */}
             <Route path = '/login' element={<Login/>} />
             <Route path = '/register' element={<Register/>} />

@@ -239,7 +239,7 @@ const Header = React.memo(() => {
                     {user ?(<><MenuItem><Link
                     p={3}
                     role={'group'}
-                    to={`/user/${user.userId}`}
+                    to={`/accountSettings`}
                     style={{fontSize:'m',
                     fontWeight:'500',
                     color:{linkColor},}}>

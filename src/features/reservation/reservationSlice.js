@@ -9,10 +9,10 @@ const initialState = {
     message: ''
 }
 
-export const createReservation = createAsyncThunk('reservation/create', async ({ reservation, bikeId, userId },thunkAPI) => {
+export const createReservation = createAsyncThunk('reservation/create', async ({ reservation, id, userId },thunkAPI) => {
 try {
     const token = thunkAPI.getState().auth.user.access_token
-    return await reservationService.createReservation(reservation, bikeId, userId, token)
+    return await reservationService.createReservation(reservation, id, userId, token)
     } catch (error) {
         const message = (error.response &&
             error.response.data && error.data.message)
@@ -92,10 +92,10 @@ export const getAllReservations = createAsyncThunk('reservation/getAllReservatio
 })
 
 
-export const updateReservation = createAsyncThunk('reservation/updateReservation', async ({ userId, resId, reservation }, thunkAPI) => {
+export const updateReservation = createAsyncThunk('reservation/updateReservation', async ({ userId, resId, reserve }, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.access_token
-        const res = await reservationService.updateReservation(reservation, resId, userId, token)
+        const res = await reservationService.updateReservation(reserve, resId, userId, token)
         return res
     }
     catch (error) {
@@ -226,7 +226,7 @@ export const reservationSlice = createSlice({
             .addCase(updateReservation.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.reservations = state.reservations.map((reservation) =>
+                state.reservations = state.reservations?.items?.map((reservation) =>
                 reservation.id === action.payload.id
                     ? {
                         ...reservation,
@@ -237,6 +237,7 @@ export const reservationSlice = createSlice({
                     }
                     : reservation
                 );
+                console.log(state.reservations)
             })
             .addCase(updateReservation.rejected, (state, action) => {
                 state.isLoading = false
@@ -249,7 +250,7 @@ export const reservationSlice = createSlice({
             .addCase(cancelReservation.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.reservations = state.reservations.map((reservation) =>
+                state.reservations = state.reservations?.items?.map((reservation) =>
                 reservation.id === action.payload.id
                     ? {
                         ...reservation,
@@ -269,7 +270,7 @@ export const reservationSlice = createSlice({
             .addCase(deleteReservation.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.reservations = state.reservations.filter(
+                state.reservations = state.reservations?.items?.filter(
                 (reservation) => reservation.id !== action.payload.id
                 );
             })

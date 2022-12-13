@@ -1,8 +1,8 @@
 import custom_axios from "../../axios/axiosSetup";
 import { ApiConstants } from "../../constants/ApiConstant";
 
-const createReservation = async (reservation, bikeId, userId, token) => {
-    const response = await custom_axios(token).post(ApiConstants.RES.ADD(userId, bikeId), {
+const createReservation = async (reservation, id, userId, token) => {
+    const response = await custom_axios(token).post(ApiConstants.RES.ADD(userId, id), {
         model: reservation.model,
         startDate : reservation.startDate,
         endDate: reservation.endDate,
@@ -43,6 +43,7 @@ const updateReservation = async (reservation, resId, userId, token) => {
         endDate: reservation.endDate,
         userEmail: reservation.userEmail,
     })
+    console.log(response)
     return response.data
 }
 

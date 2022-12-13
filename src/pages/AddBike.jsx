@@ -16,10 +16,14 @@ import {
     Button,
 } from '@chakra-ui/react';
 
+import useBackButton from '../hooks/useBackButton';
+
+
 const AddBike = React.memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth)
+  const backButton = useBackButton();
   
   useEffect(() => {
     console.log(user)
@@ -76,6 +80,7 @@ const AddBike = React.memo(() => {
 
   return (
     <>
+      {backButton}
     <Stack minH={'91vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={5} w={'full'} maxW={'md'}>
