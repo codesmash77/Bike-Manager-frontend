@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import Spinner from '../components/Spinner';
@@ -40,12 +40,12 @@ const ManageBikes = React.memo(() => {
     const navigate = useNavigate();
     const backButton = useBackButton();
     const { user, isError, message, isLoading } = useSelector((state) => state.auth)
-    const [page, setPage] = React.useState(1);
+    const [page, setPage] = useState(1);
 
-    const firstField = React.useRef()
+    const firstField = useRef()
 
-    const [bikeId, setBikeId] = React.useState('');
-    const [userId, setUserId] = React.useState(user?.userId);
+    const [bikeId, setBikeId] = useState('');
+    const [userId, setUserId] = useState(user?.userId);
     const [sendRequest, setSendRequest] = useState(false);
     const [reservations, setReservations] = useState([])
 

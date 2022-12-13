@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable */
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from "react-router-dom";
 import Spinner from '../components/Spinner';
@@ -59,9 +60,9 @@ const MyReservations = React.memo(() => {
     const { isOpen: isEditResOpen , onOpen: onEditResOpen, onClose: onEditResClose  } = useDisclosure()
     const { isOpen: isAddRevOpen , onOpen: onAddRevOpen, onClose: onAddRevClose  } = useDisclosure()
 
-    const initialRef = React.useRef(null)
-    const finalRef = React.useRef(null)
-    const firstField = React.useRef()
+    const initialRef = useRef(null)
+    const finalRef = useRef(null)
+    const firstField = useRef()
     const [sendRequest, setSendRequest] = useState(false);
 
   useEffect(() => {

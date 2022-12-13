@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getReviewByBike } from "../features/review/reviewSlice";
 import Spinner from '../components/Spinner';
@@ -36,7 +36,6 @@ const ShowReviews = React.memo(({ bikeId }) => {
   }, [user, isError, dispatch, message])
     
     const { reviews } = useSelector((state) => state.review)
-    console.log(reviews)
     
     if (isLoading) {
         return <Spinner />

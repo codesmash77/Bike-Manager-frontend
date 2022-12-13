@@ -18,7 +18,7 @@ const Footer = React.memo(() => {
           codesmash77
         </Link>
       </Text>
-      <Text opacity="0.5">Open-Source Bike Rental Manager - Buit with Chakra UI</Text>
+      <Text opacity={0.5}>Open-Source Bike Rental Manager - Buit with Chakra UI and React</Text>
     </Flex>
   );
 });
