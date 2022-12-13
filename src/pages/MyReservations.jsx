@@ -40,6 +40,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  VStack,
 } from "@chakra-ui/react";
 
 // Recommended for icons
@@ -391,13 +392,13 @@ const MyReservations = React.memo(() => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button colorScheme='blue'
+            <Button colorScheme='blue' mr={3}
               onClick={() => {
                   handleSaveReserve();
                   onEditResClose();
               }}
             >Save</Button>
-            <Button variant='outline' mr={3}
+            <Button variant='outline'
               onClick={() => { onEditResClose(); }}>
               Cancel
             </Button>

@@ -33,7 +33,6 @@ const updateBike = async (bike, bikeId, userId, token) => {
         color : bike.color,
         location: bike.location,
         isAvailable: bike.isAvailable,
-        avgRating: bike.avgRating,
     })
     return response.data
 }

@@ -5,21 +5,18 @@ import { getBike } from '../features/bike/bikeSlice';
 import Spinner from '../components/Spinner';
 import { toast } from 'react-toastify';
 import {
-  Box, Badge, Text, Button, ButtonGroup, Center, Drawer, Input,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure, Stack, FormLabel,
+  Box, Badge, Text, Button, ButtonGroup, Center, Drawer, Input, Heading,
+  DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent,
+  DrawerCloseButton, useDisclosure, Stack, FormLabel, Spacer, Container, Flex, useColorMode, useColorModeValue,
 } from "@chakra-ui/react";
 import { StarIcon } from '@chakra-ui/icons';
 import { createReservation } from '../features/reservation/reservationSlice';
 import useBackButton from '../hooks/useBackButton';
+import ShowReviews from '../components/ShowReviews';
 
 const Bike = React.memo(() => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const bg = useColorModeValue('beige','purple.900');
     const navigate = useNavigate();
     const params = useParams();
     const backButton = useBackButton();
@@ -205,6 +202,17 @@ const Bike = React.memo(() => {
         </DrawerContent>
       </Drawer>
       </Center>
+      <Spacer />
+      <Container minW={'auto'}>
+        <Heading as='h2' size='lg' p={10}>
+          User Ratings and Comments.............
+        </Heading>
+        <Box borderRadius={'xl'} my={4} boxShadow={'md'} bg={bg}>
+          <Flex justifyContent="space-between" alignItems={'baseline'} mb={20}>
+              <ShowReviews bikeId = {params?.bikeId} />
+          </Flex>
+        </Box>
+      </Container>
     </>
     )
 })

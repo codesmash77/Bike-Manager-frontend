@@ -42,7 +42,7 @@ const BikeCard = React.memo(({ bike }) => {
                 name="star"
                 type="star"
                 key={i}
-                color={i < bike?.avgRating ? 'teal.500' : 'gray.300'}
+                color={i < bike?.avgRating ? 'yellow.500' : 'gray.300'}
               />
             ))}
           <Box as='span' ml='2' color='gray.600' fontSize='sm'>

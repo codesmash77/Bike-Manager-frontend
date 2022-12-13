@@ -26,7 +26,6 @@ const AddBike = React.memo(() => {
   const backButton = useBackButton();
   
   useEffect(() => {
-    console.log(user)
     if (!user) {
       navigate('/login')
     }
@@ -126,7 +125,7 @@ const AddBike = React.memo(() => {
             <Checkbox 
               id="isAvailable"
               name="isAvailable"
-              checked={isAvailable}
+              isChecked={isAvailable}
               defaultChecked
               onChange={handleChange} />
             <FormErrorMessage>Availability of the Bike is required.</FormErrorMessage>

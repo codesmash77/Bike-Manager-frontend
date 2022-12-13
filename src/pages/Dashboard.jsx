@@ -59,7 +59,7 @@ const Dashboard = React.memo(() => {
   return (
     <>
       <Center p={10}><Button bg='green.300' onClick={onOpen}>Show Filters</Button></Center>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size={'2xl'}>
         <ModalOverlay
           bg='none'
           backdropFilter='auto'
