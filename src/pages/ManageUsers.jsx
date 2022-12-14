@@ -64,16 +64,12 @@ const ManageUsers = React.memo(() => {
       navigate('/login')
     }
 
-    if (isError) {
-      toast.error(message)
-    }
-
     if (sendRequest) {
       
     }
     fetchUsers()
 
-  }, [user, navigate, isError, dispatch, message, sendRequest])
+  }, [user, navigate, dispatch, sendRequest])
     
     const fetchReservations = async (id) => {
         const res = await reservationService.getReservationByUser(id, user?.access_token)

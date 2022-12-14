@@ -1,6 +1,7 @@
 import custom_axios from "../../axios/axiosSetup"
 import { ApiConstants } from '../../constants/ApiConstant';
 import jwt_decode from "jwt-decode";
+import axios from 'axios';
 
 const register = async (userData) => {
     const response = await custom_axios().post(ApiConstants.USER.ADD, {

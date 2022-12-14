@@ -11,7 +11,7 @@ const initialState = {
 
 export const createReview = createAsyncThunk('review/create', async ({ review, userId, bikeId, resId },thunkAPI) => {
 try {
-    const token = await thunkAPI.getState().auth.user.access_token
+    const token = await thunkAPI.getState().auth?.user?.access_token
     return await reviewService.createReview(review, userId, bikeId, resId, token)
     } catch (error) {
         const message = (error.response &&
@@ -23,7 +23,7 @@ try {
 
 export const getReview = createAsyncThunk('review/getReview', async (reviewId, thunkAPI) => {
     try {
-        const token = await thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth?.user?.access_token
         const res = await reviewService.getReview(reviewId,token)
         return res
     }
@@ -37,7 +37,7 @@ export const getReview = createAsyncThunk('review/getReview', async (reviewId, t
 
 export const getReviewByBike = createAsyncThunk('review/getReviewByBike', async (bikeId, thunkAPI) => {
     try {
-        const token = await thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth?.user?.access_token
         const res = await reviewService.getReviewByBike(bikeId,token)
         return res
     }
