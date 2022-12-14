@@ -38,7 +38,6 @@ const ShowReviews = React.memo(({ bikeId }) => {
   }, [user, isError, dispatch, message])
     
   const { reviews } = useSelector((state) => state.review)
-  console.log(reviews)
     
     if (isLoading) {
         return <Spinner />
@@ -51,7 +50,7 @@ const ShowReviews = React.memo(({ bikeId }) => {
             {reviews?.length!==0 ? (<Wrap spacing={10}>
                 {reviews?.map((review, i) => {
                     return (
-                        <WrapItem p={4} bg={bg} borderRadius={'xl'} boxShadow={'md'} size={'lg'}>
+                        <WrapItem p={4} bg={bg} borderRadius={'xl'} boxShadow={'md'} minW='md'>
                             <Stat>
                                 <StatLabel>
                                   <Avatar name={review?.userName}
