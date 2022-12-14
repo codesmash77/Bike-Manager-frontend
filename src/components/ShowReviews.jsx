@@ -17,13 +17,15 @@ import {
     VStack,
     Box,
     Avatar,
+    useColorModeValue,
 } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 
 const ShowReviews = React.memo(({ bikeId }) => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth)
-    const { isLoading, isError, message } = useSelector((state) => state.review)
+  const { isLoading, isError, message } = useSelector((state) => state.review)
+  const bg = useColorModeValue('beige','purple.900');
 
   useEffect(() => {
     if (isError) {
@@ -35,7 +37,8 @@ const ShowReviews = React.memo(({ bikeId }) => {
 
   }, [user, isError, dispatch, message])
     
-    const { reviews } = useSelector((state) => state.review)
+  const { reviews } = useSelector((state) => state.review)
+  console.log(reviews)
     
     if (isLoading) {
         return <Spinner />
@@ -48,7 +51,7 @@ const ShowReviews = React.memo(({ bikeId }) => {
             {reviews?.length!==0 ? (<Wrap spacing={10}>
                 {reviews?.map((review, i) => {
                     return (
-                        <WrapItem>
+                        <WrapItem p={4} bg={bg} borderRadius={'xl'} boxShadow={'md'} size={'lg'}>
                             <Stat>
                                 <StatLabel>
                                   <Avatar name={review?.userName}

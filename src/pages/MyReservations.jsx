@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { getReservationByUser } from '../features/reservation/reservationSlice';
 import { createReview } from '../features/review/reviewSlice';
 import { updateReservation, cancelReservation, deleteReservation } from '../features/reservation/reservationSlice';
+import moment from 'moment';
 
 import {
   Flex,
@@ -100,7 +101,7 @@ const MyReservations = React.memo(() => {
   });
 
   const handleSaveReview = async () => {
-    const res = await dispatch(createReview({ review, userId, bikeId }));
+    const res = await dispatch(createReview({ review, userId, bikeId, resId }));
     if (res?.meta?.requestStatus === 'fulfilled') {
       toast.success("Review successfully added!");
     }
@@ -183,8 +184,8 @@ const MyReservations = React.memo(() => {
       </Flex>
     ),
     email: <Text>{reservation?.userEmail}</Text>,
-    startDate: <Text>{reservation?.startDate}</Text>,
-    endDate: <Text>{reservation?.endDate}</Text>,
+    startDate: <Text>{moment().format(reservation?.startDate,moment.ISO_8601)}</Text>,
+    endDate: <Text>{moment().format(reservation?.endDate,moment.ISO_8601)}</Text>,
     status: <Text>{reservation?.status}</Text>,
     actions: (
       <ButtonGroup>
@@ -195,6 +196,7 @@ const MyReservations = React.memo(() => {
             setReview({ ...review, ['userName']: user?.userName });
             setBikeId(reservation?.bikeId);
             setUserId(reservation?.userId);
+            setResId(reservation?.id);
           }}
           size="sm"
         >

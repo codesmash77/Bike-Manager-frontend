@@ -47,8 +47,8 @@ export const ApiConstants = {
         },
     },
     REV: {
-        ADD: (userId, bikeId) => {
-            return '/review/' + userId +'/'+ bikeId
+        ADD: (userId, bikeId, resId) => {
+            return '/review/' + userId +'/'+ bikeId +'/'+ resId
         },
         GET_REV_BY_BIKE: (bikeId) => {
             return '/review/Bike/' + bikeId

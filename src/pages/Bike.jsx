@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import {
   Box, Badge, Text, Button, ButtonGroup, Center, Drawer, Input, Heading,
   DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent,
-  DrawerCloseButton, useDisclosure, Stack, FormLabel, Spacer, Container, Flex, useColorMode, useColorModeValue,
+  DrawerCloseButton, useDisclosure, Stack, FormLabel, Spacer, Container, Flex,
 } from "@chakra-ui/react";
 import { StarIcon } from '@chakra-ui/icons';
 import { createReservation } from '../features/reservation/reservationSlice';
@@ -16,7 +16,6 @@ import ShowReviews from '../components/ShowReviews';
 
 const Bike = React.memo(() => {
     const dispatch = useDispatch();
-    const bg = useColorModeValue('beige','purple.900');
     const navigate = useNavigate();
     const params = useParams();
     const backButton = useBackButton();
@@ -127,7 +126,6 @@ const Bike = React.memo(() => {
                 <Button disabled={!bikes?.isAvailable} ref={btnRef} colorScheme='teal'
                   onClick={() => {
                     onOpen();
-                    console.log(user)
                     setReservation({
                       ...reservation,
                       ['userEmail']: user?.userEmail,
@@ -207,7 +205,7 @@ const Bike = React.memo(() => {
         <Heading as='h2' size='lg' p={10}>
           User Ratings and Comments.............
         </Heading>
-        <Box borderRadius={'xl'} my={4} boxShadow={'md'} bg={bg}>
+        <Box borderRadius={'xl'} my={4} boxShadow={'md'}>
           <Flex justifyContent="space-between" alignItems={'baseline'} mb={20}>
               <ShowReviews bikeId = {params?.bikeId} />
           </Flex>
