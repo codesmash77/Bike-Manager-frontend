@@ -3,10 +3,10 @@ import { ApiConstants } from "../../constants/ApiConstant";
 
 const createReservation = async (reservation, id, userId, token) => {
     const response = await custom_axios(token).post(ApiConstants.RES.ADD(userId, id), {
-        model: reservation.model,
-        startDate : reservation.startDate,
-        endDate: reservation.endDate,
-        userEmail: reservation.userEmail,
+        model: reservation?.model,
+        startDate : reservation?.startDate,
+        endDate: reservation?.endDate,
+        userEmail: reservation?.userEmail,
     })
     return response.data
 }
@@ -38,10 +38,10 @@ const getReservationByUserAndBike = async (userId, bikeId, token) => {
 
 const updateReservation = async (reservation, resId, userId, token) => {
     const response = await custom_axios(token).patch(ApiConstants.RES.UPDATE_RES(userId, resId), {
-        model: reservation.model,
-        startDate : reservation.startDate,
-        endDate: reservation.endDate,
-        userEmail: reservation.userEmail,
+        model: reservation?.model,
+        startDate : reservation?.startDate,
+        endDate: reservation?.endDate,
+        userEmail: reservation?.userEmail,
     })
     console.log(response)
     return response.data

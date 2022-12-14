@@ -3,11 +3,11 @@ import { ApiConstants } from "../../constants/ApiConstant";
 
 const createBike = async (bike, userId, token) => {
     const response = await custom_axios(token).post(ApiConstants.BIKE.ADD(userId), {
-        model: bike.model,
-        color : bike.color,
-        location: bike.location,
-        isAvailable: bike.isAvailable,
-        avgRating: bike.avgRating,
+        model: bike?.model,
+        color : bike?.color,
+        location: bike?.location,
+        isAvailable: bike?.isAvailable,
+        avgRating: bike?.avgRating,
     })
     return response.data
 }
@@ -29,10 +29,10 @@ const getBike = async (bikeId, token) => {
 
 const updateBike = async (bike, bikeId, userId, token) => {
     const response = await custom_axios(token).patch(ApiConstants.BIKE.UPDATE_BIKE(userId, bikeId), {
-        model: bike.model,
-        color : bike.color,
-        location: bike.location,
-        isAvailable: bike.isAvailable,
+        model: bike?.model,
+        color : bike?.color,
+        location: bike?.location,
+        isAvailable: bike?.isAvailable,
     })
     return response.data
 }

@@ -3,9 +3,9 @@ import { ApiConstants } from "../../constants/ApiConstant";
 
 const createReview = async (review, userId, bikeId, resId, token) => {
     const response = await custom_axios(token).post(ApiConstants.REV.ADD(userId, bikeId, resId), {
-        comment: review.comment,
-        rating : review.rating,
-        userName: review.userName,
+        comment: review?.comment,
+        rating : review?.rating,
+        userName: review?.userName,
     })
     return response.data
 }
