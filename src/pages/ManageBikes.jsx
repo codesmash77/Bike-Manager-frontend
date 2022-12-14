@@ -85,9 +85,9 @@ const ManageBikes = React.memo(() => {
   }, [user, navigate, isError, dispatch, message, sendRequest])
   
     const fetchReservations = async (id) => {
-        const res = await reservationService.getReservationByUser(id, user?.access_token)
-        setReservations(res)
-        console.log(reservations)
+      const res = await reservationService.getReservationByBike(id, user?.access_token)
+      setReservations(res)
+      setSendRequest(!sendRequest)
     }
 
     const fetchBikes = async () => {
@@ -145,9 +145,9 @@ const ManageBikes = React.memo(() => {
       <ButtonGroup>
         <Button
           colorScheme="yellow"
-            onClick={() => {
-              fetchReservations(b?.id);
-              onViewOpen()
+          onClick={() => {
+            fetchReservations(b?.id);
+            onViewOpen()
           }}
           size="sm"
         >
