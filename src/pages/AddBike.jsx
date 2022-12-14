@@ -84,7 +84,7 @@ const AddBike = React.memo(() => {
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={5} w={'full'} maxW={'md'}>
           <Heading fontSize={'2xl'} pb={5}>Add A Bike</Heading>
-          <FormControl id="model">
+          <FormControl id="model" isInvalid={model === ''}>
             <FormLabel>Model</FormLabel>
             <Input 
               type="text" 
@@ -96,7 +96,7 @@ const AddBike = React.memo(() => {
               onChange={handleChange} />
             <FormErrorMessage>Model of the Bike is required.</FormErrorMessage>
           </FormControl>
-          <FormControl id="color">
+          <FormControl id="color" isInvalid={color === ''}>
             <FormLabel>Color</FormLabel>
             <Input 
               type="text" 
@@ -108,7 +108,7 @@ const AddBike = React.memo(() => {
               onChange={handleChange} />
             <FormErrorMessage>Color of the Bike is required.</FormErrorMessage>
           </FormControl>
-          <FormControl id="location">
+          <FormControl id="location" isInvalid={location === ''}>
             <FormLabel>Location</FormLabel>
             <Input 
               type="text" 
@@ -120,7 +120,7 @@ const AddBike = React.memo(() => {
               onChange={handleChange} />
             <FormErrorMessage>Location of the Bike is required.</FormErrorMessage>
           </FormControl>
-          <FormControl id="isAvailable">
+          <FormControl id="isAvailable" isInvalid={isAvailable === ''}>
             <FormLabel>Availability</FormLabel>
             <Checkbox 
               id="isAvailable"
