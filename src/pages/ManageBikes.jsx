@@ -73,12 +73,16 @@ const ManageBikes = React.memo(() => {
       navigate('/login')
     }
 
+    if (isError) {
+      toast.error(message)
+    }
+
     if (sendRequest) {
       
     }
     fetchBikes()
 
-  }, [user, navigate, dispatch, sendRequest])
+  }, [user, navigate, isError, message, dispatch, sendRequest])
   
     const fetchReservations = async (id) => {
       const res = await reservationService.getReservationByBike(id, user?.access_token)
