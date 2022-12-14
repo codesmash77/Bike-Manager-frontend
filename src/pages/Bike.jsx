@@ -66,7 +66,10 @@ const Bike = React.memo(() => {
         userEmail: "",
       });
     }
-    else toast.error('Bike could not be reserved for some unknown reason!')
+    else {
+      toast.error('Bike could not be reserved for some unknown reason!');
+      toast.error('Make sure the startDate and endDate are valid!')
+    }
   }
     
     if (isLoading) {
