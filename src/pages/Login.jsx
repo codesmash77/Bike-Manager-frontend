@@ -13,6 +13,7 @@ import {
   Input,
   Stack,
   Image,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 
 const Login = React.memo(() => {
@@ -62,7 +63,7 @@ const Login = React.memo(() => {
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={5} w={'full'} maxW={'md'}>
           <Heading fontSize={'2xl'} pb={5}>Sign in to your account</Heading>
-          <FormControl id="email">
+          <FormControl id="email" isInvalid={email === ''}>
             <FormLabel>Email address</FormLabel>
             <Input 
               type="email" 
@@ -73,8 +74,9 @@ const Login = React.memo(() => {
               autoComplete="email"
               autoFocus
               onChange={handleChange} />
+              <FormErrorMessage>Email is required.</FormErrorMessage>
           </FormControl>
-          <FormControl id="password">
+          <FormControl id="password" isInvalid={password === ''}>
             <FormLabel>Password</FormLabel>
             <Input 
               required
@@ -83,6 +85,7 @@ const Login = React.memo(() => {
               type="password"
               id="password"
               onChange={handleChange} />
+              <FormErrorMessage>Password is required.</FormErrorMessage>
           </FormControl>
           <Stack spacing={6}>
             <Stack

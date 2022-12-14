@@ -14,6 +14,7 @@ import {
   Input,
   Stack,
   Image,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 
 const Register = React.memo(() => {
@@ -68,7 +69,7 @@ const Register = React.memo(() => {
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
           <Heading fontSize={'2xl'} pb={5}>Sign Up Now!</Heading>
-          <FormControl id="name">
+          <FormControl id="name" isInvalid={name === ''}>
             <FormLabel>Username</FormLabel>
             <Input
               required
@@ -79,8 +80,9 @@ const Register = React.memo(() => {
               autoComplete="name"
               autoFocus
               onChange={handleChange}/>
+              <FormErrorMessage>Username is required.</FormErrorMessage>
           </FormControl>
-          <FormControl id="email">
+          <FormControl id="email" isInvalid={email === ''}>
             <FormLabel>Email address</FormLabel>
             <Input 
               type="email" 
@@ -91,8 +93,9 @@ const Register = React.memo(() => {
               autoComplete="email"
               autoFocus
               onChange={handleChange} />
+              <FormErrorMessage>Email is required.</FormErrorMessage>
           </FormControl>
-          <FormControl id="password">
+          <FormControl id="password" isInvalid={password === ''}>
             <FormLabel>Password</FormLabel>
             <Input 
               required
@@ -101,8 +104,9 @@ const Register = React.memo(() => {
               type="password"
               id="password"
               onChange={handleChange} />
+              <FormErrorMessage>Password is required.</FormErrorMessage>
           </FormControl>
-          <FormControl id="confirmPassword">
+          <FormControl id="confirmPassword" isInvalid={confirmPassword === '' || confirmPassword !== password}>
             <FormLabel>Confirm Password</FormLabel>
             <Input 
               required
@@ -111,6 +115,7 @@ const Register = React.memo(() => {
               type="password"
               id="confirmPassword"
               onChange={handleChange}/>
+              <FormErrorMessage>Confirm your Password correctly.</FormErrorMessage>
           </FormControl>
           <Stack spacing={6}>
             <Stack
