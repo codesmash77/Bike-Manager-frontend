@@ -24,7 +24,7 @@ export const createBike = createAsyncThunk('bike/create', async ({ bike, userId 
 
 export const getBike = createAsyncThunk('bike/getBike', async (bikeId, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await bikeService.getBike(bikeId,token)
         return res
     }
@@ -38,7 +38,7 @@ export const getBike = createAsyncThunk('bike/getBike', async (bikeId, thunkAPI)
 
 export const getAllBikes = createAsyncThunk('bike/getAllBikes', async ({limit, page, filter}, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await bikeService.getAllBikes(limit, page, filter, token)
         return res
     }
@@ -52,7 +52,7 @@ export const getAllBikes = createAsyncThunk('bike/getAllBikes', async ({limit, p
 
 export const getAllBikesAdmin = createAsyncThunk('bike/getAllBikesAdmin', async ({limit, page, filter}, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await bikeService.getAllBikesAdmin(limit, page, filter, token)
         return res
     }
@@ -67,7 +67,7 @@ export const getAllBikesAdmin = createAsyncThunk('bike/getAllBikesAdmin', async 
 
 export const updateBike = createAsyncThunk('bike/updateBike', async ({ userId, bikeId, bike }, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await bikeService.updateBike(bike, bikeId, userId, token)
         return res
     }
@@ -81,7 +81,7 @@ export const updateBike = createAsyncThunk('bike/updateBike', async ({ userId, b
 
 export const deleteBike = createAsyncThunk('bike/deleteBike', async ({ userId, bikeId }, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await bikeService.deleteBike(bikeId, userId, token)
         return res
     }

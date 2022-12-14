@@ -11,7 +11,7 @@ const initialState = {
 
 export const createReservation = createAsyncThunk('reservation/create', async ({ reservation, id, userId },thunkAPI) => {
 try {
-    const token = thunkAPI.getState().auth.user.access_token
+    const token = await thunkAPI.getState().auth.user.access_token
     return await reservationService.createReservation(reservation, id, userId, token)
     } catch (error) {
         const message = (error.response &&
@@ -23,7 +23,7 @@ try {
 
 export const getReservation = createAsyncThunk('reservation/getReservation', async (resId, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await reservationService.getReservation(resId,token)
         return res
     }
@@ -37,7 +37,7 @@ export const getReservation = createAsyncThunk('reservation/getReservation', asy
 
 export const getReservationByUser = createAsyncThunk('reservation/getReservationByUser', async (userId, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await reservationService.getReservationByUser(userId,token)
         return res
     }
@@ -51,7 +51,7 @@ export const getReservationByUser = createAsyncThunk('reservation/getReservation
 
 export const getReservationByBike = createAsyncThunk('reservation/getReservationByBike', async (bikeId, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await reservationService.getReservationByBike(bikeId,token)
         return res
     }
@@ -65,7 +65,7 @@ export const getReservationByBike = createAsyncThunk('reservation/getReservation
 
 export const getReservationByUserAndBike = createAsyncThunk('reservation/getReservationByUserAndBike', async ({userId, bikeId}, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await reservationService.getReservationByUserAndBike(userId, bikeId, token)
         return res
     }
@@ -79,7 +79,7 @@ export const getReservationByUserAndBike = createAsyncThunk('reservation/getRese
 
 export const getAllReservations = createAsyncThunk('reservation/getAllReservations', async (_, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await reservationService.getAllReservations(token)
         return res
     }
@@ -94,7 +94,7 @@ export const getAllReservations = createAsyncThunk('reservation/getAllReservatio
 
 export const updateReservation = createAsyncThunk('reservation/updateReservation', async ({ userId, resId, reserve }, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await reservationService.updateReservation(reserve, resId, userId, token)
         return res
     }
@@ -108,7 +108,7 @@ export const updateReservation = createAsyncThunk('reservation/updateReservation
 
 export const deleteReservation = createAsyncThunk('reservation/deleteReservation', async ({ userId, resId }, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await reservationService.deleteReservation(resId, userId, token)
         return res
     }
@@ -122,7 +122,7 @@ export const deleteReservation = createAsyncThunk('reservation/deleteReservation
 
 export const cancelReservation = createAsyncThunk('reservation/cancelReservation', async ({ userId, resId }, thunkAPI) => {
     try {
-        const token = thunkAPI.getState().auth.user.access_token
+        const token = await thunkAPI.getState().auth.user.access_token
         const res = await reservationService.cancelReservation(resId, userId, token)
         return res
     }
