@@ -1,9 +1,9 @@
-import custom_axios from "../../axios/axiosSetup"
+import custom_axios, {custom_axios2} from "../../axios/axiosSetup"
 import { ApiConstants } from '../../constants/ApiConstant';
 import jwt_decode from "jwt-decode";
 
 const register = async (userData) => {
-    const response = await custom_axios().post(ApiConstants.USER.ADD, {
+    const response = await custom_axios2().post(ApiConstants.USER.ADD, {
         username: userData?.name,
         email: userData?.email,
         password: userData?.password
@@ -11,9 +11,9 @@ const register = async (userData) => {
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
     }
-    const decoded = jwt_decode(response?.data?.access_token)
-    const access_token = response?.data
-    const data = { ...access_token, userId: decoded?.userId, userName: decoded?.userName, userRole: decoded.userRole, password: decoded.password }
+    // const decoded = jwt_decode(response?.data?.access_token)
+    // const access_token = response?.data
+    // const data = { ...access_token, userId: decoded?.userId, userName: decoded?.userName, userRole: decoded.userRole, password: decoded.password }
 
     return response.data
 }
@@ -53,6 +53,11 @@ const upgradeUser = async (id, token) => {
     return response.data
 }
 
+const downgradeUser = async (id, token) => {
+    const response = await custom_axios(token).patch(ApiConstants.USER.DOWNGRADE(id))
+    return response.data
+}
+
 const update = async (id, userData, token) => {
     const response = await custom_axios(token).patch(ApiConstants.USER.UPDATE(id), {
         username: userData.username,
@@ -72,7 +77,7 @@ const updateUser = async (id, userData, token) => {
 }
 
 const deleteUser = async (id, token) => {
-    const response = await custom_axios(token).patch(ApiConstants.USER.DELETE(id))
+    const response = await custom_axios(token).delete(ApiConstants.USER.DELETE(id))
     return response
 }
 
@@ -88,6 +93,7 @@ const authService = {
     getUsersById,
     getUsersByEmail,
     upgradeUser,
+    downgradeUser,
     update,
     updateUser,
     deleteUser,

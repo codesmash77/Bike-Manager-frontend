@@ -96,8 +96,8 @@ const ManageBikes = React.memo(() => {
     }
 
     const updateBike = async () => {
-        const res = await bikeService.updateBike(bike,bikeId,userId)
-        if (res.request.status === 200) {
+      const res = await bikeService.updateBike(bike, bikeId, userId, user?.access_token)
+        if (res) {
             setBike({
                     model: "",
                     color: "",
@@ -111,8 +111,8 @@ const ManageBikes = React.memo(() => {
         setSendRequest(!sendRequest)
     }
 
-    const removeBike = async () => {
-        const res = await bikeService.deleteBike(bikeId, userId, user?.access_token)
+    const removeBike = async (id) => {
+        const res = await bikeService.deleteBike(id, userId, user?.access_token)
         setUserId('')
         setSendRequest(!sendRequest)
     }
@@ -168,7 +168,7 @@ const ManageBikes = React.memo(() => {
           colorScheme="red"
           onClick={() => {
             setBikeId(b?.id);
-            removeBike()
+            removeBike(b?.id);
           }}
           size="sm"
         >
@@ -244,7 +244,7 @@ const ManageBikes = React.memo(() => {
             />
           </Box>
         </Center>
-        ) : (<Text>You have no Reservations.</Text>)}
+        ) : (<><Spinner/></>)}
         
         <Drawer
             isOpen={isEditOpen}

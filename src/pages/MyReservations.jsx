@@ -105,7 +105,7 @@ const MyReservations = React.memo(() => {
     if (res?.meta?.requestStatus === 'fulfilled') {
       toast.success("Review successfully added!");
     }
-    else toast.error('Your Review could not be added unfortunately!')
+    else toast.error('You have already reviewed this reservation!')
     setReview({
       userName: '',
       comment: '',
@@ -132,8 +132,8 @@ const MyReservations = React.memo(() => {
     setSendRequest(!sendRequest);
   }
 
-  const handleCancelRes = async () => {
-    const res = await dispatch(cancelReservation({ userId, resId }));
+  const handleCancelRes = async (id, uid) => {
+    const res = await dispatch(cancelReservation({ userId: uid, resId: id }));
     if (res?.meta?.requestStatus === 'fulfilled') {
       toast.success("Reservation successfully cancelled!");
     }
@@ -149,8 +149,8 @@ const MyReservations = React.memo(() => {
     setSendRequest(!sendRequest);
   }
   
-  const handleDeleteRes = async () => {
-    const res = await dispatch(deleteReservation({ userId, resId }));
+  const handleDeleteRes = async (id, uid) => {
+    const res = await dispatch(deleteReservation({ uid, id }));
     if (res?.meta?.requestStatus === 'fulfilled') {
       toast.success("Reservation successfully deleted!");
     }
@@ -184,8 +184,8 @@ const MyReservations = React.memo(() => {
       </Flex>
     ),
     email: <Text>{reservation?.userEmail}</Text>,
-    startDate: <Text>{moment().format(reservation?.startDate,moment.ISO_8601)}</Text>,
-    endDate: <Text>{moment().format(reservation?.endDate,moment.ISO_8601)}</Text>,
+    startDate: <Text>{(moment().format(reservation?.startDate, moment.ISO_8601)).split('T')[0]}</Text>,
+    endDate: <Text>{(moment().format(reservation?.endDate, moment.ISO_8601)).split('T')[0]}</Text>,
     status: <Text>{reservation?.status}</Text>,
     actions: (
       <ButtonGroup>
@@ -214,23 +214,25 @@ const MyReservations = React.memo(() => {
         >
           <Icon as={EditIcon} fontSize="20" />
         </Button>
-        <Button
-          colorScheme="gray"
-          onClick={() => {
-            setResId(reservation?.id);
-            setUserId(reservation?.userId);
-            handleCancelRes();
-          }}
-          size="sm"
-        >
-          <Icon as={NotAllowedIcon} fontSize="20" />
-        </Button>
+        {reservation?.status !== 'cancelled' && (
+          <Button
+            colorScheme="gray"
+            onClick={() => {
+              setResId(reservation?.id);
+              setUserId(reservation?.userId);
+              handleCancelRes(reservation?.id,reservation?.userId);
+            }}
+            size="sm"
+          >
+            <Icon as={NotAllowedIcon} fontSize="20" />
+          </Button>
+        )}
         <Button
           colorScheme="red"
           onClick={() => {
             setResId(reservation?.id);
             setUserId(reservation?.userId);
-            handleDeleteRes();
+            handleDeleteRes(reservation?.id,reservation?.userId);
           }}
           size="sm"
         >

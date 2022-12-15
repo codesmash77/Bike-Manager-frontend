@@ -71,6 +71,7 @@ const AddBike = React.memo(() => {
                 isAvailable: true,
                 userId: user?.userId,
             });
+            navigate('/home')
           }
           else { toast.error("Failed to create Bike!");}
     }

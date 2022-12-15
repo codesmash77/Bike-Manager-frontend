@@ -106,10 +106,10 @@ export const updateReservation = createAsyncThunk('reservation/updateReservation
     }
 })
 
-export const deleteReservation = createAsyncThunk('reservation/deleteReservation', async ({ userId, resId }, thunkAPI) => {
+export const deleteReservation = createAsyncThunk('reservation/deleteReservation', async ({ uid, id }, thunkAPI) => {
     try {
         const token = await thunkAPI.getState().auth?.user?.access_token
-        const res = await reservationService.deleteReservation(resId, userId, token)
+        const res = await reservationService.deleteReservation(id, uid, token)
         return res
     }
     catch (error) {

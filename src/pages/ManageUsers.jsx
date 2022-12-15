@@ -28,10 +28,11 @@ import {
   DrawerCloseButton,
   InputGroup,
   InputRightElement,
+  Tooltip,
 } from "@chakra-ui/react";
 
 import { FiTrash2, FiUser } from "react-icons/fi";
-import { EditIcon, CalendarIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { EditIcon, CalendarIcon, ViewIcon, ViewOffIcon, TriangleUpIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import { Table } from "react-chakra-pagination";
 import useBackButton from '../hooks/useBackButton';
 import useReserveModal from '../hooks/useReserveModal';
@@ -78,7 +79,6 @@ const ManageUsers = React.memo(() => {
     const fetchReservations = async (id) => {
         const res = await reservationService.getReservationByUser(id, user?.access_token)
         setReservations(res)
-        console.log(reservations)
     }
     
     const fetchUsers = async () => {
@@ -104,11 +104,23 @@ const ManageUsers = React.memo(() => {
         setSendRequest(!sendRequest)
     }
 
-    const removeUser = async () => {
-        const res = await authService.deleteUser(userId, user?.access_token)
+    const removeUser = async (id) => {
+        const res = await authService.deleteUser(id, user?.access_token)
         setUserId('')
         setSendRequest(!sendRequest)
     }
+  
+    const upgrade = async (id) => {
+        const res = await authService.upgradeUser(id, user?.access_token)
+        setUserId('')
+        setSendRequest(!sendRequest)
+    }
+  
+    const downgrade = async (id) => {
+          const res = await authService.downgradeUser(id, user?.access_token)
+          setUserId('')
+          setSendRequest(!sendRequest)
+      }
 
     const handleChange = (e) => { setUserData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));}
 
@@ -126,6 +138,7 @@ const ManageUsers = React.memo(() => {
     role: <Text>{u?.role}</Text>,
     actions: (
       <ButtonGroup>
+        <Tooltip label='View User Reservations'>
         <Button
           colorScheme="yellow"
             onClick={() => {
@@ -136,8 +149,42 @@ const ManageUsers = React.memo(() => {
         >
           <Icon as={CalendarIcon} fontSize="20" />
         </Button>
+        </Tooltip>
+        {u?.id !== user.userId && (u?.role === 'ADMIN' ?
+          (<>
+            <Tooltip label='Demote User to REGULAR'>
+            <Button
+              colorScheme="transparent"
+              variant={'outline'}
+              boxShadow={3}
+              onClick={() => {
+                downgrade(u?.id);
+              }}
+              size="sm"
+            >
+              <Icon as={TriangleDownIcon} fontSize="10" color='red'/>
+            </Button>
+            </Tooltip>
+          </>)
+          :
+          (<>
+            <Tooltip label='Promote User to ADMIN'>
+            <Button
+              colorScheme="transparent"
+              variant={'outline'}
+              boxShadow={3}
+              onClick={() => {
+                upgrade(u?.id);
+              }}
+              size="sm"
+            >
+              <Icon as={TriangleUpIcon} fontSize="10" color='green'/>
+            </Button>
+            </Tooltip>
+          </>))}
+        <Tooltip label='Edit User'>
         <Button
-          colorScheme="green"
+          colorScheme="blue"
           onClick={() => {
             onEditOpen();
             setUserId(u?.id);
@@ -147,17 +194,19 @@ const ManageUsers = React.memo(() => {
         >
           <Icon as={EditIcon} fontSize="20" />
         </Button>
+        </Tooltip>
+        <Tooltip label='Delete User'>
         <Button
           colorScheme="red"
           onClick={() => {
-            setUserId(u?.id);
-            removeUser()
+            removeUser(u?.id)
           }}
           disabled={u?.id === user.userId}
           size="sm"
         >
         <Icon as={FiTrash2} fontSize="20" />
         </Button>
+        </Tooltip>
       </ButtonGroup>
     )
   }));
@@ -216,7 +265,7 @@ const ManageUsers = React.memo(() => {
           />
           </Box>
         </Center>
-        ) : (<Text>You have no Reservations.</Text>)}
+        ) : (<><Spinner/></>)}
         
         <Drawer
             isOpen={isEditOpen}
@@ -307,7 +356,7 @@ const ManageUsers = React.memo(() => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-      {reservationList}
+      { reservationList }
     </>
 )
 })

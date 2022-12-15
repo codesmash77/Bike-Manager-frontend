@@ -13,7 +13,7 @@ export const ApiConstants = {
             return '/bike/'+bikeId
         },
         UPDATE_BIKE: (userId, bikeId) => {
-            return '/bike/'+userId+'/'+bikeId
+            return '/bike/updateBike/'+userId+'/'+bikeId
         },
         DELETE_BIKE: (userId, bikeId) => {
             return '/bike/'+userId+'/'+bikeId
@@ -69,6 +69,9 @@ export const ApiConstants = {
         },
         UPGRADE: (id) => {
             return '/user/upgrade/' + id
+        },
+        DOWNGRADE: (id) => {
+            return '/user/downgrade/' + id
         },
         UPDATE:(id) => {
             return '/user/' + id

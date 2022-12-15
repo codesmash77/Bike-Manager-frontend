@@ -12,7 +12,6 @@ const initialState = {
 export const createBike = createAsyncThunk('bike/create', async ({ bike, userId },thunkAPI) => {
     try {
     const token = await thunkAPI.getState().auth?.user?.access_token
-    console.log(bike, userId, token)
     return await bikeService.createBike(bike, userId, token)
     } catch (error) {
         const message = (error.response &&

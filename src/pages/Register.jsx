@@ -41,9 +41,7 @@ const Register = React.memo(() => {
             navigate('/')
         }
 
-        dispatch(reset())
-
-    },[user, isError, isSuccess, message, navigate, dispatch])
+    },[user, isError, isSuccess, message, navigate])
 
     const handleChange = (e) => { setFormData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));}
     const handleSubmit = (e) => {

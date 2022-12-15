@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { Table } from "react-chakra-pagination";
 import { FiUser } from "react-icons/fi";
+import moment from 'moment';
 
 export default function useReserveModal(reservations, onClose, isOpen) {
     const [page, setPage] = React.useState(1);
@@ -31,8 +32,8 @@ export default function useReserveModal(reservations, onClose, isOpen) {
       </Flex>
     ),
     email: <Text>{reservation?.userEmail}</Text>,
-    startDate: <Text>{reservation?.startDate}</Text>,
-    endDate: <Text>{reservation?.endDate}</Text>,
+    startDate: <Text>{(moment().format(reservation?.startDate, moment.ISO_8601)).split('T')[0]}</Text>,
+    endDate: <Text>{(moment().format(reservation?.endDate, moment.ISO_8601)).split('T')[0]}</Text>,
     status: <Text>{reservation?.status}</Text>,
   }));
 
@@ -82,6 +83,7 @@ export default function useReserveModal(reservations, onClose, isOpen) {
                     }}
                     totalRegisters={reservations?.meta?.itemCount}
                     page={page}
+                    
                     // Listen change page event and control the current page using state
                     onPageChange={(page) => setPage(page)}
                     columns={tableColumns}
