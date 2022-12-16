@@ -46,13 +46,15 @@ const Dashboard = React.memo(() => {
     
     applyFilters();
 
-  }, [user, navigate, isError , message])
+  }, [user, navigate, isError , message, page, limit])
 
   const { bikes } = useSelector((state) => state.bike)
 
   const handlePageClick = async (data) => {
     setPage(data?.selected + 1);
   };
+ 
+  console.log(user)
 
   const applyFilters = async () => {
     if(user?.userRole !== 'ADMIN')

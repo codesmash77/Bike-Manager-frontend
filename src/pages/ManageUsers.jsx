@@ -64,6 +64,10 @@ const ManageUsers = React.memo(() => {
     if (!user) {
       navigate('/login')
     }
+    
+    if (user?.userRole !== "ADMIN") {
+        navigate('/forbiden')
+    }
 
     if (isError) {
       toast.error(message)
@@ -150,7 +154,7 @@ const ManageUsers = React.memo(() => {
           <Icon as={CalendarIcon} fontSize="20" />
         </Button>
         </Tooltip>
-        {u?.id !== user.userId && (u?.role === 'ADMIN' ?
+        {u?.id !== user?.userId && (u?.role === 'ADMIN' ?
           (<>
             <Tooltip label='Demote User to REGULAR'>
             <Button
@@ -201,7 +205,7 @@ const ManageUsers = React.memo(() => {
           onClick={() => {
             removeUser(u?.id)
           }}
-          disabled={u?.id === user.userId}
+          disabled={u?.id === user?.userId}
           size="sm"
         >
         <Icon as={FiTrash2} fontSize="20" />

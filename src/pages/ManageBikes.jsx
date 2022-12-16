@@ -72,6 +72,10 @@ const ManageBikes = React.memo(() => {
     if (!user) {
       navigate('/login')
     }
+    
+    if (user?.userRole !== "ADMIN") {
+        navigate('/forbiden')
+    }
 
     if (isError) {
       toast.error(message)

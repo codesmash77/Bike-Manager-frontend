@@ -72,10 +72,10 @@ const Header = React.memo(() => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth)
-    const onLogout = () => {
-        dispatch(logout())
-        dispatch(reset())
-        navigate('/')
+    const onLogout = async() => {
+        await dispatch(logout())
+        await dispatch(reset())
+        navigate('/login')
     }
 
   const linkColor = useColorModeValue('green.800', 'green.200');
